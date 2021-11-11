@@ -1,0 +1,26 @@
+@{
+    ViewBag.Title = "Example Antbits frontend page";
+    ViewBag.Description = "Example Antbits frontend page";
+}
+@model AntbitsQuestionViewModel
+
+<form method="post">
+    <fieldset class="nhsuk-fieldset">
+        <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+            <h1 class="nhsuk-fieldset__heading">
+                @Model.body
+            </h1>
+        </legend>
+        <div class="nhsuk-radios">
+            @foreach (var answer_body in Model.answers){
+                <div class="nhsuk-radios__item">
+                    <!--<input class="nhsuk-radios__input" type="radio" name="answer" value="@answer_body["value"]" required id="radio_@answer_body["id"]">-->
+                    <input class="nhsuk-radios__input" type="radio" asp-for="answer" value="@answer_body["value"]" />
+                    <label class="nhsuk-label nhsuk-radios__label" for="radio_@answer_body["id"]">@answer_body["value"]</label>
+                </div>
+            }
+        </div>
+    </fieldset>
+
+    <button class="nhsuk-button" type="submit">Next Question</button>
+</form>

@@ -1,0 +1,55 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+    feedsToUse: 'config'
+    nugetConfigPath: 'src/nhsuk.base-application/nuget.config'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: 'test'
+    projects: '**/*.csproj'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/src/nhsuk.base-application.UnitTests'
+    
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/src/nhsuk.base-application'
+
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--no-build'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/src/nhsuk.base-application'
+
+- task: AzureRmWebAppDeployment@4
+  displayName: Deploy
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'nhsuk-development(07748954-52d6-46ce-95e6-2701bfc715b4)'
+    appType: 'webApp'
+    WebAppName: 'nhsuk-base-application-dev-uks'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'

@@ -1,0 +1,9 @@
+@{
+    ViewBag.Title = "Example Antbits frontend page";
+    ViewBag.Description = "Example Antbits frontend page";
+}
+@model AntbitsResultViewModel
+
+<h2>Here's your depression score @Model.accumulatedValues["depressionScore"]</h2>
+
+<progress id="progress_0" value="@Model.accumulatedValues["depressionScore"]" min="@Model.accumulatedValues["depressionMin"]" max="@Model.accumulatedValues["depressionMax"]" style="widht:100%; height:3em"></progress>

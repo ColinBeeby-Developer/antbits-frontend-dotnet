@@ -1,0 +1,17 @@
+@{
+    ViewBag.Title = "Example Antbits frontend page";
+    ViewBag.Description = "Example Antbits frontend page";
+}
+@model AntbitsIntroViewModel
+
+<h1>@Model.Intro_title</h1>
+
+@Model.Intro_copy
+
+@Html.ActionLink(
+    "Start",
+    "Question",
+    "AntbitsFrontend",
+    null,
+    new { @class = "nhsuk-button" }
+)

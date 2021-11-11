@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  nhsuk.base-application:
+    image: nhsuk.base-application
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # Pass Azure personal access token if wanting to use NHS.UK header and footer package
+      # args: 
+        # nuget_pat: ${NUGET_PAT}
+    ports:
+      - 8080:80
