@@ -8,7 +8,7 @@ A .NET project which include some of the common things needed at NHS.UK.
 
 ## Overview
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#<your-repository-url>)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ColinBeeby-Developer/antbits-frontend-dotnet)
 
 ### ASP .NET Core web application
 - ASP .NET Core MVC Views using .NET 3.1 Framework
